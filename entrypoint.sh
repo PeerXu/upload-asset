@@ -31,8 +31,9 @@ fi
 
 UPLOAD_FILE="${UPLOAD_FILE}${SUFFIX}"
 
+env
+
 curl -s \
-     -o /dev/null \
      -H "Authorization: ${GITHUB_TOKEN}" \
      -H "Content-Type: ${FILE_MIME_TYPE}" \
      --data-binary @${FILE} \
