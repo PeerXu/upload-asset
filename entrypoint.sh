@@ -43,8 +43,7 @@ echo "UPLOAD_URL=${UPLOAD_URL}"
 echo "FILE_MIME_TYPE=${FILE_MIME_TYPE}"
 echo "UPLOAD_FILE=${UPLOAD_FILE}"
 
-curl -s \
-     -H "Authorization: ${GITHUB_TOKEN}" \
+curl -H "Authorization: ${GITHUB_TOKEN}" \
      -H "Content-Type: ${FILE_MIME_TYPE}" \
      --data-binary @"${FILE}" \
      "${UPLOAD_URL}?name=${UPLOAD_FILE}"
