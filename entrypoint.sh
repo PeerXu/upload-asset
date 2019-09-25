@@ -10,7 +10,7 @@ SUFFIX=${INPUT_SUFFIX}
 OS=${INPUT_OS}
 ARCH=${INPUT_ARCH}
 WITH_TAG=${INPUT_WITH_TAG}
-UPLOAD_URL=$(jq .release.upload_url ${GITHUB_EVENT_PATH} | sed "s/{?name,label}//g")
+UPLOAD_URL=$(jq .release.upload_url ${GITHUB_EVENT_PATH} | tr -d '"' | sed "s/{?name,label}//g")
 FILE_MIME_TYPE=$(file -b --mime-type ${FILE})
 
 UPLOAD_FILE=$(basename ${FILE} ${SUFFIX})
