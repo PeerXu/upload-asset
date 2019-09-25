@@ -1,0 +1,21 @@
+name: Upload Asset
+description: Upload file to asset on release event
+inputs:
+  file:
+    description: which file to upload
+    required: true
+  suffix:
+    description: file suffix
+    default: .tar.gz
+  os:
+    description: which operating system platform for file to execute
+    default: ""
+  arch:
+    description: which architecture platform for file to execute
+    default: ""
+  with_tag:
+    description: upload file to asset with tag version
+    default: true
+runs:
+  using: docker
+  image: Dockerfile
