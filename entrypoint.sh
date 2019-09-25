@@ -10,8 +10,7 @@ SUFFIX=${INPUT_SUFFIX}
 OS=${INPUT_OS}
 ARCH=${INPUT_ARCH}
 WITH_TAG=${INPUT_WITH_TAG}
-UPLOAD_URL=$(jq .release.upload_url ${GITHUB_EVENT_PATH})
-UPLOAD_URL=$(echo ${UPLOAD_URL} | sed "s/{?name,label}//g")
+UPLOAD_URL=$(jq .release.upload_url ${GITHUB_EVENT_PATH} | tr -d '"' | sed "s/{?name,label}//g")
 FILE_MIME_TYPE=$(file -b --mime-type ${FILE})
 
 UPLOAD_FILE=$(basename ${FILE} ${SUFFIX})
@@ -41,7 +40,7 @@ echo "OS=${OS}"
 echo "ARCH=${ARCH}"
 echo "WITH_TAG=${WITH_TAG}"
 echo "UPLOAD_URL=${UPLOAD_URL}"
-echo "FILE_MIME_TYPE={FILE_MIME_TYPE}"
+echo "FILE_MIME_TYPE=${FILE_MIME_TYPE}"
 echo "UPLOAD_FILE=${UPLOAD_FILE}"
 
 curl -s \
