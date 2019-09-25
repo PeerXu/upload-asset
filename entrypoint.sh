@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -x
+
 if [ "x$(jq .release ${GITHUB_EVENT_PATH})" == "x" ]; then
     echo "no release object"
     exit 1
@@ -28,20 +30,6 @@ fi
 if [ "x${ARCH}" != "x" ]; then
     UPLOAD_FILE="${UPLOAD_FILE}_${ARCH}"
 fi
-
-UPLOAD_FILE="${UPLOAD_FILE}${SUFFIX}"
-
-env
-
-echo "GITHUB_TOKEN=${GITHUB_TOKEN}"
-echo "FILE=${FILE}"
-echo "SUFFIX=${SUFFIX}"
-echo "OS=${OS}"
-echo "ARCH=${ARCH}"
-echo "WITH_TAG=${WITH_TAG}"
-echo "UPLOAD_URL=${UPLOAD_URL}"
-echo "FILE_MIME_TYPE=${FILE_MIME_TYPE}"
-echo "UPLOAD_FILE=${UPLOAD_FILE}"
 
 curl -H "Authorization: ${GITHUB_TOKEN}" \
      -H "Content-Type: ${FILE_MIME_TYPE}" \
