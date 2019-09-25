@@ -31,7 +31,9 @@ if [ "x${ARCH}" != "x" ]; then
     UPLOAD_FILE="${UPLOAD_FILE}_${ARCH}"
 fi
 
-curl -H "Authorization: ${GITHUB_TOKEN}" \
+UPLOAD_FILE="${UPLOAD_FILE}${SUFFIX}"
+
+curl -H "Authorization: token ${GITHUB_TOKEN}" \
      -H "Content-Type: ${FILE_MIME_TYPE}" \
      --data-binary @"${FILE}" \
      "${UPLOAD_URL}?name=${UPLOAD_FILE}"
