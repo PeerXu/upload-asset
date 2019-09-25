@@ -36,7 +36,7 @@ env
 curl -s \
      -H "Authorization: ${GITHUB_TOKEN}" \
      -H "Content-Type: ${FILE_MIME_TYPE}" \
-     --data-binary @${FILE} \
-     "${upload_url}?name=${UPLOAD_FILE}"
+     --data-binary @"${FILE}" \
+     "${UPLOAD_URL}?name=${UPLOAD_FILE}"
 
 echo "upload asset"
