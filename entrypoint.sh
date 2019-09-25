@@ -17,6 +17,7 @@ UPLOAD_FILE=$(basename ${FILE} ${SUFFIX})
 
 if ${WITH_TAG}; then
     TAG=$(jq .release.tag_name ${GITHUB_EVENT_PATH})
+    TAG=${TAG##v}
     UPLOAD_FILE="${UPLOAD_FILE}_${TAG}"
 fi
 
