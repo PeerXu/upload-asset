@@ -2,6 +2,12 @@
 
 This action upload file to release asset.
 
+## Environments
+
+### `GITHUB_TOKEN`
+
+**Required** set `secrets.GITHUB_TOKEN` to `env.GITHUB_TOKEN`
+
 ## Inputs
 
 ### `file`
@@ -27,3 +33,15 @@ which architecture platform for file to execute
 upload file to asset with tag version
 
 **Default** `true`
+
+### Example usage
+
+    uses: PeerXu/upload-asset@v1
+    with:
+      file: path/to/binary.tar.gz
+      os: linux
+      arch: amd64
+      with_tag: true
+      suffix: .tar.gz
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

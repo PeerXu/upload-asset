@@ -1,7 +1,5 @@
 #! /bin/bash
 
-set -x
-
 if [ "x$(jq .release ${GITHUB_EVENT_PATH})" == "x" ]; then
     echo "no release object"
     exit 1
