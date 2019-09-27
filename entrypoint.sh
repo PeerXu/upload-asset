@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -e
+
 if [ "x$(jq .release ${GITHUB_EVENT_PATH})" == "x" ]; then
     echo "no release object"
     exit 1
@@ -31,9 +33,10 @@ fi
 
 UPLOAD_FILE="${UPLOAD_FILE}${SUFFIX}"
 
-curl -H "Authorization: token ${GITHUB_TOKEN}" \
+curl -s \
+     -H "Authorization: token ${GITHUB_TOKEN}" \
      -H "Content-Type: ${FILE_MIME_TYPE}" \
      --data-binary @"${FILE}" \
      "${UPLOAD_URL}?name=${UPLOAD_FILE}"
 
-echo "upload asset"
+echo "upload asset: ${UPLOAD_FILE}"
