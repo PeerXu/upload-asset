@@ -36,12 +36,12 @@ upload file to asset with tag version
 
 ### Example usage
 
-    uses: PeerXu/upload-asset@v1
-    with:
-      file: path/to/binary.tar.gz
-      os: linux
-      arch: amd64
-      with_tag: true
-      suffix: .tar.gz
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: PeerXu/upload-asset@v1
+      with:
+        file: path/to/binary.tar.gz
+        os: linux
+        arch: amd64
+        with_tag: true
+        suffix: .tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
