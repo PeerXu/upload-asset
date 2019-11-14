@@ -33,10 +33,11 @@ if [ "x${ARCH}" != "x" ]; then
 fi
 
 UPLOAD_FILE="${UPLOAD_FILE}${SUFFIX}"
+mv ${FILE} ${UPLOAD_FILE}
 
 if ${WITH_SHA1}; then
     UPLOAD_SHA1_FILE="${UPLOAD_FILE}.sha1"
-    sha1sum ${FILE} > ${UPLOAD_SHA1_FILE}
+    sha1sum ${UPLOAD_FILE} > ${UPLOAD_SHA1_FILE}
     curl -s \
          -H "Authorization: token ${GITHUB_TOKEN}" \
          -H "Content-Type: $(file -b --mime-type ${UPLOAD_SHA1_FILE})" \
@@ -47,7 +48,7 @@ fi
 curl -s \
      -H "Authorization: token ${GITHUB_TOKEN}" \
      -H "Content-Type: ${FILE_MIME_TYPE}" \
-     --data-binary @"${FILE}" \
+     --data-binary @"${UPLOAD_FILE}" \
      "${UPLOAD_URL}?name=${UPLOAD_FILE}"
 
 echo "upload asset: ${UPLOAD_FILE}"
