@@ -34,6 +34,12 @@ upload file to asset with tag version
 
 **Default** `true`
 
+### `with_sha1`
+
+upload file to asset with hash in sha1 algorithm
+
+**Default** `true`
+
 ### Example usage
 
     uses: PeerXu/upload-asset@v1
@@ -42,6 +48,7 @@ upload file to asset with tag version
       os: linux
       arch: amd64
       with_tag: true
+      with_sha1: true
       suffix: .tar.gz
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

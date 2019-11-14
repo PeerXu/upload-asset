@@ -16,6 +16,9 @@ inputs:
   with_tag:
     description: upload file to asset with tag version
     default: true
+  with_sha1:
+    description: upload file to asset with hash in sha1 algorithm
+    default: true
 runs:
   using: docker
   image: Dockerfile

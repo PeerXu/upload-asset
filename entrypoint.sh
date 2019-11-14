@@ -12,6 +12,7 @@ SUFFIX=${INPUT_SUFFIX}
 OS=${INPUT_OS}
 ARCH=${INPUT_ARCH}
 WITH_TAG=${INPUT_WITH_TAG}
+WITH_SHA1=${INPUT_WITH_SHA1}
 UPLOAD_URL=$(jq .release.upload_url ${GITHUB_EVENT_PATH} | tr -d '"' | sed "s/{?name,label}//g")
 FILE_MIME_TYPE=$(file -b --mime-type ${FILE})
 
@@ -32,6 +33,16 @@ if [ "x${ARCH}" != "x" ]; then
 fi
 
 UPLOAD_FILE="${UPLOAD_FILE}${SUFFIX}"
+
+if ${WITH_SHA1}; then
+    UPLOAD_SHA1_FILE="${UPLOAD_FILE}.sha1"
+    sha1sum ${FILE} > ${UPLOAD_SHA1_FILE}
+    curl -s \
+         -H "Authorization: token ${GITHUB_TOKEN}" \
+         -H "Content-Type: $(file -b --mime-type ${UPLOAD_SHA1_FILE})" \
+         --data-binary @"${UPLOAD_SHA1_FILE}" \
+         "${UPLOAD_URL}?name=${UPLOAD_SHA1_FILE}"
+fi
 
 curl -s \
      -H "Authorization: token ${GITHUB_TOKEN}" \
